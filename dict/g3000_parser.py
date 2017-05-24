@@ -30,19 +30,19 @@ def MeaningDict(tmp):
         line = each.strip()
         if len(line) == 0:
             continue
-        if line.find(u"考法") >= 0:
-            con = re.sub(u"【.*?】", "", line)
+        if line.find(u"[MEANING") >= 0:
+            con = re.sub(u"[.*?]", "", line)
             self["explanation"] = con.strip()
             continue
-        if line.find(u"【派") >= 0:
+        if line.find(u"[DERIVATIVES") >= 0:
             self["explanation"] = line.strip()
             continue
-        if line.find(u"【例") >= 0:
-            con = re.sub(u"【.*?】", "", line)
+        if line.find(u"[EXAMPLE") >= 0:
+            con = re.sub(u"[.*?]", "", line)
             self["example"] = con.strip()
             continue
-        if line.find(u"【同") >= 0:
-            con = re.sub(u"【.*?】", "", line)
+        if line.find(u"[SYNONYMS") >= 0:
+            con = re.sub(u"[.*?]", "", line)
             words = split_words(con)
             for ew in words:
                 rew = ""
@@ -52,8 +52,8 @@ def MeaningDict(tmp):
                 if len(rew.strip()):
                     self["syno"].append(rew.strip())
             continue
-        if line.find(u"【近") >= 0:
-            con = re.sub(u"【.*?】", "", line)
+        if line.find(u"[SYNONYMS") >= 0:
+            con = re.sub(u"[.*?]", "", line)
             words = split_words(con)
             for ew in words:
                 rew = ""
@@ -63,8 +63,8 @@ def MeaningDict(tmp):
                 if len(rew.strip()):
                     self["homo"].append(rew.strip())
             continue
-        if line.find(u"【反") >= 0:
-            con = re.sub(u"【.*?】", "", line)
+        if line.find(u"[ANTONYM") >= 0:
+            con = re.sub(u"[.*?]", "", line)
             words = split_words(con)
             for ew in words:
                 rew = ""
@@ -97,13 +97,13 @@ def WordObj(w, desc, cid, uid, gid):
         line = each.strip()
         if len(line) == 0:
             continue
-        if line.find(u"考法") >= 0 or line.find(u"【派") >= 0:
+        if line.find(u"[MEANING") >= 0 or line.find(u"[DERIVATIVES") >= 0:
             if len(tmp):
                 if not is_derv:
                     self["meanings"].append(MeaningDict(tmp))
                 else:
                     self["derv"].append(MeaningDict(tmp))
-            if line.find(u"【派") >= 0:
+            if line.find(u"[DERIVATIVES") >= 0:
                 is_derv = True
             else:
                 is_derv = False
@@ -201,6 +201,6 @@ for each in storage:
     obj = WordObj(each[0], each[1], each[2], each[3], each[4] - 1)
     tot.append(obj)
 
-f = codecs.open("../obj.json", "w", "utf-8")
+f = codecs.open("g3000.json", "w", "utf-8")
 json.dump(tot, f, ensure_ascii = False)
 f.close()
