@@ -1,2 +1,2 @@
 # vocabdr
-A text based vocabulary builder
+Yet another vocabulary builder
