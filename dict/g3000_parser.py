@@ -1,12 +1,20 @@
-# -*- coding: utf-8 -*-
-# forked from https://github.com/xunkai55/pili3000
+
+# coding: utf-8
+
+# In[1]:
 
 import codecs
 from string import Template
 import re
 
+
+# In[2]:
+
 alphabet = u'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
 alphabet2 = u'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM '
+
+
+# In[3]:
 
 def split_words(line):
     res = line.split(u",")
@@ -18,6 +26,8 @@ def split_words(line):
             res.extend(each.split(sep))
     return res
 
+
+# In[4]:
 
 def MeaningDict(tmp):
 
@@ -78,6 +88,9 @@ def MeaningDict(tmp):
 
     return self
 
+
+# In[6]:
+
 def WordObj(w, desc, cid, uid, gid):
 
     self = {}
@@ -117,11 +130,20 @@ def WordObj(w, desc, cid, uid, gid):
             self["derv"].append(MeaningDict(tmp))
     return self
 
+
+# In[7]:
+
 f = codecs.open("g3000.txt", "r", "utf-8")
 txt = f.read()
 f.close()
 
+
+# In[10]:
+
 lines = txt.split('\n')
+
+
+# In[12]:
 
 list_id = 0
 unit_id = 0
@@ -131,6 +153,16 @@ w = ""
 desc = ""
 tar = []
 storage = []
+
+
+# In[ ]:
+
+
+
+
+# In[13]:
+
+
 
 for i in range(len(lines)):
     line = lines[i].strip()
@@ -204,3 +236,9 @@ for each in storage:
 f = codecs.open("g3000.json", "w", "utf-8")
 json.dump(tot, f, ensure_ascii = False)
 f.close()
+
+
+# In[ ]:
+
+
+
