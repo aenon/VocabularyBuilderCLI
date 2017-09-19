@@ -1,2 +1,2 @@
-# cvbuilder
+# vocabdr
 A text based vocabulary builder
