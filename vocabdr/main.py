@@ -1,10 +1,13 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[36]:
 
 import pandas as pd
 import sys
+# in case there are special characters in names
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 
 # In[2]:
@@ -50,6 +53,60 @@ for index, row in df_barron.iterrows():
     else:
         print("Incorrect!")
         print("Answer: " + row.WORD)
+
+
+# In[57]:
+
+data = open('../dict/g3000.json').read()
+
+
+# In[60]:
+
+data = open('../dict/g3000.txt').read()
+
+
+# In[63]:
+
+data.decode("utf-8")
+
+
+# In[ ]:
+
+
+
+
+# In[64]:
+
+import json
+from pprint import pprint
+import codecs
+
+
+# In[65]:
+
+with open('../dict/g3000.json') as data_file:    
+    data = json.load(data_file)
+
+
+# In[67]:
+
+print(data[0]['desc'])
+
+
+# In[ ]:
+
+
+
+
+# In[44]:
+
+with codecs.open('../dict/g3000.json', 'r', 'utf-8') as data_file:
+    data = json.load(data_file, 'utf-8')
+
+
+# In[49]:
+
+data[0]['desc']
 
 
 # In[ ]:
