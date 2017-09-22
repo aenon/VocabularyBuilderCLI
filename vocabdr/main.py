@@ -1,13 +1,13 @@
 
 # coding: utf-8
 
-# In[26]:
+# In[1]:
 
 import pandas as pd
 import sys
 
 
-# In[27]:
+# In[2]:
 
 # if len(sys.argv) > 1:
 #     word_dict = sys.argv[1]
@@ -15,30 +15,41 @@ import sys
 #     word_dict = "barrons_333"
 
 
-# In[28]:
+# In[3]:
 
 def read_word_dict(word_dict):
     df_dict = pd.read_csv("../dict/" + word_dict + ".csv")
     return df_dict
 
 
-# In[29]:
+# In[12]:
 
 df_barron = read_word_dict("barrons_333")
+df_barron.WORD = df_barron.WORD.str.lower()
 
 
-# In[33]:
+# In[13]:
+
+df_barron.head()
+
+
+# In[14]:
+
+row = df_barron.iloc[0]
+
+
+# In[25]:
 
 for index, row in df_barron.iterrows():
-    print(row.WORD)
-    user_input = raw_input("Press Enter to continue...")
-    if user_input == "q":
+    word_input = raw_input(row.MEANING + ": ").lower().strip()
+    if word_input == ":q":
+        print("Exiting...")
         break
-    print(row.MEANING)
-    user_input = raw_input("Press Enter to continue...")
-    if user_input == "q":
-        break
-    print("\033[H\033[J")
+    if word_input == row.WORD:
+        print("Correct!")
+    else:
+        print("Incorrect!")
+        print("Answer: " + row.WORD)
 
 
 # In[ ]:
