@@ -31,82 +31,44 @@ df_barron = read_word_dict("barrons_333")
 df_barron.WORD = df_barron.WORD.str.lower()
 
 
-# In[13]:
-
-df_barron.head()
-
-
 # In[14]:
 
 row = df_barron.iloc[0]
 
 
-# In[25]:
+# In[151]:
 
-for index, row in df_barron.iterrows():
-    word_input = raw_input(row.MEANING + ": ").lower().strip()
-    if word_input == ":q":
-        print("Exiting...")
-        break
-    if word_input == row.WORD:
-        print("Correct!")
-    else:
-        print("Incorrect!")
-        print("Answer: " + row.WORD)
-
-
-# In[57]:
-
-data = open('../dict/g3000.json').read()
+def vocatest(df):
+    for index, row in df.iterrows():
+        meaning = str(row.MEANING)
+        word_input = raw_input(meaning + "\n: ").lower().strip()
+        if word_input == ":q":
+            print("Exiting...\n")
+            break
+        if word_input == row.WORD:
+            print("Correct!\n")
+        else:
+            print("Incorrect!\n")
+            print("Answer: " + row.WORD + "\n")
 
 
-# In[60]:
+# In[145]:
 
-data = open('../dict/g3000.txt').read()
-
-
-# In[63]:
-
-data.decode("utf-8")
-
-
-# In[ ]:
+# df_g3000 = pd.read_json('../dict/g3000.json')
+# df_g3000.rename(columns = {'word': 'WORD'}, 
+#                 inplace=True)
+# df_g3000['MEANING'] = df_g3000.desc.apply(lambda desc: '\n'.join([x for x in desc.split('\n') if x.upper().startswith('[MEANING')]))
+# df_g3000[['WORD', 'MEANING']].to_csv('../dict/g3000.csv', index=0)
 
 
+# In[146]:
+
+df_g3000 = read_word_dict('g3000')
 
 
-# In[64]:
+# In[96]:
 
-import json
-from pprint import pprint
-import codecs
-
-
-# In[65]:
-
-with open('../dict/g3000.json') as data_file:    
-    data = json.load(data_file)
-
-
-# In[67]:
-
-print(data[0]['desc'])
-
-
-# In[ ]:
-
-
-
-
-# In[44]:
-
-with codecs.open('../dict/g3000.json', 'r', 'utf-8') as data_file:
-    data = json.load(data_file, 'utf-8')
-
-
-# In[49]:
-
-data[0]['desc']
+row = df_g3000.iloc[0]
 
 
 # In[ ]:
