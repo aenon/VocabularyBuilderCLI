@@ -1,7 +1,10 @@
 
 # coding: utf-8
 
-# In[78]:
+# # vocabdr
+# Yet another vocabulary builder
+
+# In[2]:
 
 
 import pandas as pd
