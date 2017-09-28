@@ -4,7 +4,7 @@
 # # vocabdr
 # Yet another vocabulary builder
 
-# In[2]:
+# In[1]:
 
 
 import pandas as pd
@@ -18,7 +18,7 @@ import math
 # sys.setdefaultencoding("utf-8")
 
 
-# In[37]:
+# In[2]:
 
 
 # if len(sys.argv) > 1:
@@ -27,7 +27,7 @@ import math
 #     word_dict = "barrons_333"
 
 
-# In[42]:
+# In[3]:
 
 
 class color:
@@ -43,16 +43,18 @@ class color:
     END = '\033[0m'
 
 
-# In[115]:
+# In[9]:
 
 
 def dict_read(word_dict):
     df = pd.read_csv("../dict/" + word_dict + ".csv")
     df['REVIEW'] = True
+    if not 'DESC' in df.columns:
+        df['DESC'] = df['MEANING']
     return df
 
 
-# In[116]:
+# In[10]:
 
 
 def dict_select():
@@ -68,7 +70,7 @@ def dict_select():
         return "g3000"
 
 
-# In[117]:
+# In[11]:
 
 
 def unit_select(df):
@@ -80,7 +82,7 @@ def unit_select(df):
     return 1
 
 
-# In[156]:
+# In[12]:
 
 
 def unit_learn(df, unit):
@@ -115,7 +117,7 @@ def unit_learn(df, unit):
         df = df[df.REVIEW]          
 
 
-# In[ ]:
+# In[13]:
 
 
 def main():
@@ -125,4 +127,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# In[ ]:
+
+
+
 
