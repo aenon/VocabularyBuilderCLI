@@ -43,7 +43,7 @@ class color:
     END = '\033[0m'
 
 
-# In[9]:
+# In[4]:
 
 
 def dict_read(word_dict):
@@ -54,23 +54,26 @@ def dict_read(word_dict):
     return df
 
 
-# In[10]:
+# In[5]:
 
 
 def dict_select():
     print("Select one dictionary to study")
-    print("\t1. G3000")
-    print("\t2. Barron's 333")
+    print("\t1. G3000 Random")
+    print("\t2. G3000")
+    print("\t3. Barron's 333")
     selection = raw_input("Dictionary number? [1]").strip()
     if selection.startswith("2"):
+        print("Your choice is G3000.")
+        return "g3000"
+    if selection.startswith("3"):
         print("Your choice is Barron's 333.")
         return "barrons_333"
-    else:
-        print("your choice is G3000.")
-        return "g3000"
+    print("your choice is G3000 Random.")
+    return "g3000_random"
 
 
-# In[11]:
+# In[6]:
 
 
 def unit_select(df):
@@ -82,10 +85,10 @@ def unit_select(df):
     return 1
 
 
-# In[12]:
+# In[7]:
 
 
-def unit_learn(df, unit):
+def unit_learn_spell(df, unit):
     print("Let's learn unit {}!".format(unit))
     df = df.iloc[25*(unit-1): 25*unit]
     while len(df) > 0:
@@ -117,13 +120,38 @@ def unit_learn(df, unit):
         df = df[df.REVIEW]          
 
 
-# In[13]:
+# In[8]:
+
+
+def unit_learn_meaning(df, unit):
+    print("Let's learn unit {}!".format(unit))
+    df = df.iloc[25*(unit-1): 25*unit]
+    while len(df) > 0:
+        for index, row in df.iterrows():
+            word, meaning, desc = map(lambda x: x.strip(), 
+                                      [row.WORD, row.MEANING, row.DESC])
+            print(word)
+            word_input = raw_input("Know this word? ").lower().strip()
+            if word_input.startswith("y"):
+                sys.stderr.write("\x1b[2J\x1b[H")
+                print(color.DARKCYAN + color.BOLD + word + color.END)
+                df.at[index, 'REVIEW'] = False
+            else:
+                sys.stderr.write("\x1b[2J\x1b[H")
+                print(color.RED + color.BOLD + word + color.END)
+            print(desc)
+            raw_input("Press enter to continue...")
+            sys.stderr.write("\x1b[2J\x1b[H")
+        df = df[df.REVIEW]        
+
+
+# In[9]:
 
 
 def main():
     df = dict_read(dict_select())
     unit = unit_select(df)
-    unit_learn(df, unit)
+    unit_learn_meaning(df, unit)
 
 if __name__ == "__main__":
     main()
