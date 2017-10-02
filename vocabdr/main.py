@@ -88,6 +88,7 @@ def unit_select(df):
 # In[7]:
 
 
+# learn the words by learning to spell them
 def unit_learn_spell(df, unit):
     print("Let's learn unit {}!".format(unit))
     df = df.iloc[25*(unit-1): 25*unit]
@@ -123,6 +124,7 @@ def unit_learn_spell(df, unit):
 # In[8]:
 
 
+# learn the words by selecting meaning
 def unit_learn_meaning(df, unit):
     print("Let's learn unit {}!".format(unit))
     df = df.iloc[25*(unit-1): 25*unit]
